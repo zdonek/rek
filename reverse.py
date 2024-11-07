@@ -5,12 +5,12 @@ def reverse_number_part(part):
 
 def split_and_reverse(number, n):
     number_str = str(number)
-    part_size = len(number_str) // n + (1 if len(number_str) % n != 0 else 0)
+    part_size = len(number_str) // n
     parts = [number_str[i:i + part_size] for i in range(0, len(number_str), part_size)]
     
     reversed_parts = []
     with ThreadPoolExecutor(max_workers=n) as executor:
-        futures = [executor.submit(reverse_number_part, part) for part in parts]
+        futures = [executor.submit(reverse_number_part, part) for parts in part]
         for future in as_completed(futures):
             reversed_parts.append(future.result())
     
